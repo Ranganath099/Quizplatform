@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Leaderboard{% endblock %}
+
+{% block content %}
+    <h2>Leaderboard</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>User</th>
+                <th>Quiz</th>
+                <th>Score</th>
+                <th>Attempted At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attempt in attempts %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ attempt.user.username }}</td>
+                    <td>{{ attempt.quiz.title }}</td>
+                    <td>{{ attempt.score }}</td>
+                    <td>{{ attempt.attempted_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'exam_list' %}" class="btn btn-primary w-100">Back to home</a>
+{% endblock %}

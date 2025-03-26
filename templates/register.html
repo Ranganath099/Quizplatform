@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Register</h3>
+                </div>
+                <div class="card-body">
+                    {% if form.errors %}
+                        <div class="alert alert-danger text-center">
+                            Please fix the errors below.
+                        </div>
+                    {% endif %}
+                    
+                    <form method="POST" id="registerForm" novalidate>
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Username</label>
+                            <input type="text" name="username" id="id_username" class="form-control" required>
+                            <small id="usernameError" class="text-danger d-none">Username is required!</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email</label>
+                            <input type="email" name="email" id="id_email" class="form-control" required>
+                            <small id="emailError" class="text-danger d-none">Valid email is required!</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_password1" class="form-label">Password</label>
+                            <input type="password" name="password1" id="id_password1" class="form-control" required>
+                            <small id="password1Error" class="text-danger d-none">Password is required!</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_password2" class="form-label">Confirm Password</label>
+                            <input type="password" name="password2" id="id_password2" class="form-control" required>
+                            <small id="password2Error" class="text-danger d-none">Passwords must match!</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-user-plus"></i> Register
+                        </button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <p>Already have an account? <a href="{% url 'login' %}" class="text-primary">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Frontend Validation -->
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        let username = document.getElementById('id_username').value.trim();
+        let email = document.getElementById('id_email').value.trim();
+        let password1 = document.getElementById('id_password1').value.trim();
+        let password2 = document.getElementById('id_password2').value.trim();
+        let isValid = true;
+
+        if (username === "") {
+            document.getElementById('usernameError').classList.remove('d-none');
+            isValid = false;
+        } else {
+            document.getElementById('usernameError').classList.add('d-none');
+        }
+
+        if (email === "" || !email.includes("@")) {
+            document.getElementById('emailError').classList.remove('d-none');
+            isValid = false;
+        } else {
+            document.getElementById('emailError').classList.add('d-none');
+        }
+
+        if (password1 === "") {
+            document.getElementById('password1Error').classList.remove('d-none');
+            isValid = false;
+        } else {
+            document.getElementById('password1Error').classList.add('d-none');
+        }
+
+        if (password2 === "" || password1 !== password2) {
+            document.getElementById('password2Error').classList.remove('d-none');
+            isValid = false;
+        } else {
+            document.getElementById('password2Error').classList.add('d-none');
+        }
+
+        if (!isValid) {
+            event.preventDefault();  // Prevent form submission if validation fails
+        }
+    });
+</script>
+
+{% endblock %}

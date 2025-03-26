@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Create Quiz{% endblock %}
+
+{% block content %}
+    <h2>Create a New Quiz</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Create Quiz</button>
+    </form>
+    <a href="{% url 'quiz_list' %}" class="btn btn-secondary mt-3">Back to Quiz List</a>
+{% endblock %}

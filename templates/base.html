@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Quiz Platform{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'exam_list' %}">Quiz Platform</a>
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+    <div class="container">
+        <p class="mb-1">&copy; 2025 Quiz Platform. All Rights Reserved.</p>
+        <p class="mb-1">Enhance your knowledge with engaging quizzes and track your progress effortlessly.</p>
+        <p class="mb-3">Designed for learners, built for excellence.</p>
+        <div>
+            <a href="https://www.facebook.com/" target="_blank" class="text-white me-3">
+                <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="https://www.twitter.com/" target="_blank" class="text-white me-3">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" class="text-white me-3">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" class="text-white">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- Font Awesome for Social Icons -->
+<script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
